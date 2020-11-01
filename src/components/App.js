@@ -17,8 +17,8 @@ const useStyles = makeStyles({
         background: 'linear-gradient( -24.5deg, rgb(254, 220, 61) 0%, rgb(254, 220, 61) 48%, rgb(38, 34, 40) 48%, rgb(38, 34, 40) 100%)'
     },
     rootQuiz: {
-      minHeight: '100vh',
-      background: 'linear-gradient( -25.5deg, rgb(254, 220, 61, 0.7) 0%, rgb(254, 220, 61, 0.7) 48%, rgb(38, 34, 40, 0.7) 48%, rgb(38, 34, 40, 0.7) 100%)',
+        minHeight: '100vh',
+        background: 'linear-gradient( -25.5deg, rgb(254, 220, 61, 0.7) 0%, rgb(254, 220, 61, 0.7) 48%, rgb(38, 34, 40, 0.7) 48%, rgb(38, 34, 40, 0.7) 100%)',
     }
   });
 
