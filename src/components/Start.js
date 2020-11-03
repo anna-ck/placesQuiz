@@ -3,13 +3,22 @@ import {Grid, Typography, Button, Paper, Card, CardMedia} from '@material-ui/cor
 import { makeStyles } from '@material-ui/core/styles';
 import { useTheme } from "@material-ui/styles";
 import Box from '@material-ui/core/Box';
+import { FullscreenExit } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
     paper: {
         padding: '20px',
         margin: 'auto',
         backgroundColor: 'transparent',
-        boxShadow: 'none'
+        boxShadow: 'none',
+    },
+    header: {
+        width: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding:'2rem'
     },
     card: {
         width: '380px',
@@ -34,11 +43,11 @@ function Start({onQuizStart}) {
     return (
     <Paper className={classes.paper}>
         <Grid container direction='row' alignItems='flex-start' justify='center' spacing={4}>
-            <Grid item direction='column' alignItems='center' justify='center'>
+            <Grid item class={classes.header}>
                 <Typography variant='h1' color='textPrimary' align='center'>PLACES</Typography>
-                <Typography variant='subtitle' color='textPrimary' align='center'>Match the photo to the corresponding European city</Typography>
+                <Typography variant='subtitle1' color='textPrimary' align='center'>Match the photo to the corresponding European city</Typography>
                 <Box mt={3}>
-                    <Button className='button' variant="contained" color="secondary" pt={2} fullWidth='true' size='large' onClick={onQuizStart}>Start quiz</Button>
+                    <Button className='button' variant="contained" color="secondary" pt={2} fullWidth={true} size='large' onClick={onQuizStart}>Start quiz</Button>
                 </Box>
             </Grid>
             <Grid item>

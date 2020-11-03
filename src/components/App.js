@@ -13,7 +13,7 @@ import Header from './Header';
 
 const useStyles = makeStyles({
     rootStart: {
-        height: '100vh',
+        minHeight: '100vh',
         background: 'linear-gradient( -24.5deg, rgb(254, 220, 61) 0%, rgb(254, 220, 61) 48%, rgb(38, 34, 40) 48%, rgb(38, 34, 40) 100%)'
     },
     rootQuiz: {
@@ -64,15 +64,15 @@ function App() {
     <>
     <CssBaseline/>
     <Grid item container direction='column' justify='space-between' className={isQuizVisible ? classes.rootQuiz : classes.rootStart}>
-      <Grid item>
+      <Grid item container>
         <Header onHomeClick={openStartPage}/>
       </Grid>
       <Grid item container alignItems='center' justify='center' direction='row'>
-          {isStartButtonVisible ? <Grid item alignItems='center'><Start onQuizStart={handleQuizStart} /></Grid> : null }
+          {isStartButtonVisible ? <Grid item container alignItems='center'><Start onQuizStart={handleQuizStart} /></Grid> : null }
           {isQuizVisible ? <Grid item ><Quiz currentQuestion={currentQuestion} onQuestionChange={goToNextQuestion} /></Grid> : null }
           {isResultVisible ? <Grid item><Result finalResult={currentPoints} onTryAgain={handleQuizStart} onHomeClick={openStartPage}/></Grid> : null}
       </Grid>
-      <Grid item justify='flex-start'>
+      <Grid item container justify='flex-start'>
         <Footer />
       </Grid>
     </Grid>
