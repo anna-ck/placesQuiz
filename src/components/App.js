@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Grid, CssBaseline} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import questions from '../utilities/questions';
+import {shuffledQuestions} from '../utilities/questions';
 
 import Start from './Start';
 import Quiz from './Quiz';
@@ -23,6 +23,7 @@ const useStyles = makeStyles({
   });
 
 function App() {
+  const [nextIndex, setNextIndex] = useState(0)
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [isStartButtonVisible, setStartButtonVisible] = useState(true);
   const [isQuizVisible, setQuizVisible] = useState(false);
@@ -39,7 +40,8 @@ function App() {
   }
 
   const handleQuizStart = () => {
-    setCurrentQuestion(questions[0])
+    setNextIndex((index) => index + 1)
+    setCurrentQuestion(shuffledQuestions[0])
     setStartButtonVisible(false)
     setQuizVisible(true)
     setResultVisible(false)
@@ -47,16 +49,17 @@ function App() {
   }
 
   const goToNextQuestion = (answerInfo) => {
-    const currentIndex = currentQuestion.id -1;
     if (answerInfo) {
       setCurrentPoints((prevPoints) => prevPoints + 10)
     }
-    if (questions[currentIndex + 1]) {
-      setCurrentQuestion(questions[currentIndex + 1])
+    if (shuffledQuestions[nextIndex]) {
+      setCurrentQuestion(shuffledQuestions[nextIndex])
+      setNextIndex((index) => index + 1)
     }
     else {
       setQuizVisible(false)
       setResultVisible(true)
+      setNextIndex(0)
     }
   }
 
@@ -69,7 +72,7 @@ function App() {
       </Grid>
       <Grid item container alignItems='center' justify='center' direction='row'>
           {isStartButtonVisible ? <Grid item container alignItems='center'><Start onQuizStart={handleQuizStart} /></Grid> : null }
-          {isQuizVisible ? <Grid item ><Quiz currentQuestion={currentQuestion} onQuestionChange={goToNextQuestion} /></Grid> : null }
+          {isQuizVisible ? <Grid item ><Quiz currentQuestion={currentQuestion} nextIndex={nextIndex} onQuestionChange={goToNextQuestion} /></Grid> : null }
           {isResultVisible ? <Grid item><Result finalResult={currentPoints} onTryAgain={handleQuizStart} onHomeClick={openStartPage}/></Grid> : null}
       </Grid>
       <Grid item container justify='flex-start'>

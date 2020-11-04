@@ -277,4 +277,21 @@ const questions = [
     },
 ]
 
-export default questions
+const shuffle = (array) => {
+    const b = array.slice()
+    const newArr = [];
+    
+    for(let i= 0; i<array.length; i++){
+     let arr = b[Math.floor(Math.random()*b.length)];
+      
+     let index = b.indexOf(arr);
+      
+      b.splice(index, 1 );
+      
+      newArr.push(arr)
+      
+    }
+    return newArr
+}
+
+export const shuffledQuestions = shuffle(questions)

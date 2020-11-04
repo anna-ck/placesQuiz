@@ -59,7 +59,7 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-function Quiz ({currentQuestion, onQuestionChange}) {
+function Quiz ({currentQuestion, nextIndex, onQuestionChange}) {
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
     const [remainingTime, setRemainingTime] = useState(100);
@@ -104,7 +104,7 @@ function Quiz ({currentQuestion, onQuestionChange}) {
     return (
         <Paper className={classes.paper}>
             <Card className={classes.card}>
-                <CardHeader subheader={`${currentQuestion.id}/12`}/>
+                <CardHeader subheader={`${nextIndex}/12`}/>
                 {remainingTime <= 0 ? 
                     <Box height='40px'>
                         <Typography variant='body1' className={classes.message} align='center'>{message}</Typography>
