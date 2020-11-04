@@ -12,6 +12,10 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: 'transparent',
         boxShadow: 'none'
     },
+    message: {
+        color: '#ffffff',
+        backgroundColor: '#ff0000'
+    },
     card: {
         width: '400px',
         border: '10px solid #01ABAA',
@@ -59,6 +63,7 @@ function Quiz ({currentQuestion, onQuestionChange}) {
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
     const [remainingTime, setRemainingTime] = useState(100);
+    const [message, setMessage] = useState('Time is up!');
     const classes = useStyles();
     const answers = currentQuestion.answers;
 
@@ -75,6 +80,7 @@ function Quiz ({currentQuestion, onQuestionChange}) {
 
     const handleAnswerCheck = (e, key) => {
         setRemainingTime(0)
+        setMessage('')
         if (!selectedAnswer) {
             e.preventDefault();
             setSelectedAnswer(key)
@@ -91,6 +97,7 @@ function Quiz ({currentQuestion, onQuestionChange}) {
         setRemainingTime(100)
         setSelectedAnswer(null)
         setIsAnswerCorrect(null)
+        setMessage('Time is up!')
         onQuestionChange(isAnswerCorrect)
     }
 
@@ -98,7 +105,11 @@ function Quiz ({currentQuestion, onQuestionChange}) {
         <Paper className={classes.paper}>
             <Card className={classes.card}>
                 <CardHeader subheader={`${currentQuestion.id}/12`}/>
-                {remainingTime <= 0 ? <Box height='40px'/> : <ProgressBar remainingTime={remainingTime}/>}
+                {remainingTime <= 0 ? 
+                    <Box height='40px'>
+                        <Typography variant='body1' className={classes.message} align='center'>{message}</Typography>
+                    </Box> : 
+                    <ProgressBar remainingTime={remainingTime}/>}
                 <CardMedia className={classes.media} image={require(`../images/${currentQuestion.img}.jpg`)} />
                 <CardContent>
                     <List>
@@ -115,8 +126,8 @@ function Quiz ({currentQuestion, onQuestionChange}) {
                     </List>
                 </CardContent>
                 <CardActions>
-                    <IconButton disabled={remainingTime > 0} className={classes.action}>
-                        <ArrowForwardIcon fontSize='large' color={remainingTime > 0 ? 'disabled' : 'secondary'} onClick={handleQuestionChange}/>
+                    <IconButton disabled={remainingTime > 0} className={classes.action} onClick={handleQuestionChange}>
+                        <ArrowForwardIcon fontSize='large' color={remainingTime > 0 ? 'disabled' : 'secondary'}/>
                     </IconButton>
                 </CardActions>
             </Card>

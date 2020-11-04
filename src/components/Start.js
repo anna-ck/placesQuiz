@@ -49,7 +49,7 @@ function Start({onQuizStart}) {
     return (
     <Paper className={classes.paper}>
         <Grid container direction='row' alignItems='flex-start' justify='center' spacing={4}>
-            <Grid item class={classes.header}>
+            <Grid item className={classes.header}>
                 <Typography variant='h1' color='textPrimary' align='center'>PLACES</Typography>
                 <Typography variant='subtitle1' color='textPrimary' align='center'>Match the photo to the corresponding European city</Typography>
                 <Box mt={3}>
