@@ -24,12 +24,18 @@ const useStyles = makeStyles(theme => ({
         width: '380px',
         [theme.breakpoints.down("sm")] : {
             width: '300px'
+        },
+        [theme.breakpoints.down("xs")] : {
+            width: '240px'
         }
     },
     media: {
         height: '350px',
         [theme.breakpoints.down("sm")] : {
             height: '330px'
+        },
+        [theme.breakpoints.down("xs")] : {
+            height: '300px'
         }
     },
     button: {

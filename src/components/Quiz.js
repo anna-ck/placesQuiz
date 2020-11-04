@@ -18,11 +18,17 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down("sm")] : {
             width: '360px'
         },
+        [theme.breakpoints.down("xs")] : {
+            width: '320px'
+        }
     },
     media: {
         height: '250px',
         [theme.breakpoints.down("sm")] : {
             height: '180px'
+        },
+        [theme.breakpoints.down("xs")] : {
+            height: '160px'
         }
     },
     correct: {

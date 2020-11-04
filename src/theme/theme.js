@@ -17,8 +17,13 @@ const theme = createMuiTheme({
         fontFamily: [
             'Open Sans', 
             'sans-serif'
-        ].join(',')
-    },
+        ].join(','),
+        h1: {
+            '@media (max-width:400px)': {
+              fontSize: '4.5rem',
+            }
+    }
+}
   });
 
 export default theme
