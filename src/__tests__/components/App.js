@@ -2,10 +2,11 @@ import React from 'react';
 import { render, screen, cleanup, fireEvent} from '@testing-library/react';
 import App from '../../components/App'
 import {shuffledQuestions} from '../../utilities/questions'
+import { act } from "react-dom/test-utils";
 
 describe('App', () => {
     afterEach(cleanup)
-    jest.setTimeout(30000);
+    jest.useFakeTimers();
     test('should have start quiz button', () => {
         render(<App />);
         expect( () => {screen.getByText(/Start quiz/)}).not.toThrow()
@@ -65,6 +66,25 @@ describe('App', () => {
         render(<App />);
         fireEvent.click(screen.getByText(/Start quiz/))
         expect(screen.getAllByRole('button')[screen.getAllByRole('button').length - 1]).toBeDisabled()
+      })
+      test('should render quiz qith disabled answer buttons and enabled next button when time is up', () => {
+        render(<App />);
+        fireEvent.click(screen.getByText(/Start quiz/))
+        act(() => {
+            jest.advanceTimersByTime(100);
+          });
+        expect(screen.getAllByRole('button')[screen.getAllByRole('button').length - 1]).toBeDisabled()
+        expect(screen.getAllByRole('button')[screen.getAllByRole('button').length - 2]).not.toHaveClass('Mui-disabled')
+        expect(screen.getAllByRole('button')[screen.getAllByRole('button').length - 3]).not.toHaveClass('Mui-disabled')
+        expect(screen.getAllByRole('button')[screen.getAllByRole('button').length - 4]).not.toHaveClass('Mui-disabled')
+        act(() => {
+            jest.advanceTimersByTime(70000);
+          });
+        expect(screen.getAllByRole('button')[screen.getAllByRole('button').length - 1]).not.toBeDisabled()
+        expect(screen.getAllByRole('button')[screen.getAllByRole('button').length - 2]).toHaveClass('Mui-disabled')
+        expect(screen.getAllByRole('button')[screen.getAllByRole('button').length - 3]).toHaveClass('Mui-disabled')
+        expect(screen.getAllByRole('button')[screen.getAllByRole('button').length - 4]).toHaveClass('Mui-disabled')
+        expect( () => {screen.getByText("Time is up!")}).not.toThrow()
       })
   });
 
