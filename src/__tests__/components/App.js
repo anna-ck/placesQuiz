@@ -27,7 +27,7 @@ describe('App', () => {
         fireEvent.click(screen.getByText(/Quiz Heroes/))
         expect( () => {screen.getByText(/Start quiz/)}).not.toThrow()
       })
-      test('should render result page when there are no questions left', () => {
+    test('should render result page when there are no questions left', () => {
         shuffledQuestions.length = 2
         render(<App />);
         fireEvent.click(screen.getByText(/Start quiz/))
@@ -36,8 +36,8 @@ describe('App', () => {
         fireEvent.click(screen.getAllByRole('button')[screen.getAllByRole('button').length - 2])
         fireEvent.click(screen.getAllByRole('button')[screen.getAllByRole('button').length - 1])
         expect( () => {screen.getByText(/Try again/)}).not.toThrow()
-      })
-      test('should render result page when there are no questions left with 10 points score when the answer was correct', () => {
+    })
+    test('should render result page when there are no questions left with 10 points score when the answer was correct', () => {
         shuffledQuestions.length = 1
         shuffledQuestions[0].correct = 'd'
         render(<App />);
@@ -45,8 +45,8 @@ describe('App', () => {
         fireEvent.click(screen.getAllByRole('button')[screen.getAllByRole('button').length - 2])
         fireEvent.click(screen.getAllByRole('button')[screen.getAllByRole('button').length - 1])
         expect( () => {screen.getByText("Your final result is 10/10")}).not.toThrow()
-      })
-      test('should render result page when there are no questions left with 0 points score when the answer was not correct', () => {
+    })
+    test('should render result page when there are no questions left with 0 points score when the answer was not correct', () => {
         shuffledQuestions.length = 1
         shuffledQuestions[0].correct = 'd'
         render(<App />);
@@ -54,38 +54,38 @@ describe('App', () => {
         fireEvent.click(screen.getAllByRole('button')[screen.getAllByRole('button').length - 3])
         fireEvent.click(screen.getAllByRole('button')[screen.getAllByRole('button').length - 1])
         expect( () => {screen.getByText("Your final result is 0/10")}).not.toThrow()
-      })
-      test('should render with answer buttons being not disabled', () => {
+    })
+    test('should render with answer buttons being not disabled', () => {
         render(<App />);
         fireEvent.click(screen.getByText(/Start quiz/))
         expect(screen.getAllByRole('button')[screen.getAllByRole('button').length - 2]).not.toBeDisabled()
         expect(screen.getAllByRole('button')[screen.getAllByRole('button').length - 3]).not.toBeDisabled()
         expect(screen.getAllByRole('button')[screen.getAllByRole('button').length - 4]).not.toBeDisabled()
-      })
-      test('should render with next button being disabled', () => {
+    })
+    test('should render with next button being disabled', () => {
         render(<App />);
         fireEvent.click(screen.getByText(/Start quiz/))
         expect(screen.getAllByRole('button')[screen.getAllByRole('button').length - 1]).toBeDisabled()
-      })
-      test('should render quiz qith disabled answer buttons and enabled next button when time is up', () => {
+    })
+    test('should render quiz qith disabled answer buttons and enabled next button when time is up', () => {
         render(<App />);
         fireEvent.click(screen.getByText(/Start quiz/))
         act(() => {
             jest.advanceTimersByTime(100);
-          });
+        });
         expect(screen.getAllByRole('button')[screen.getAllByRole('button').length - 1]).toBeDisabled()
         expect(screen.getAllByRole('button')[screen.getAllByRole('button').length - 2]).not.toHaveClass('Mui-disabled')
         expect(screen.getAllByRole('button')[screen.getAllByRole('button').length - 3]).not.toHaveClass('Mui-disabled')
         expect(screen.getAllByRole('button')[screen.getAllByRole('button').length - 4]).not.toHaveClass('Mui-disabled')
         act(() => {
             jest.advanceTimersByTime(70000);
-          });
+        });
         expect(screen.getAllByRole('button')[screen.getAllByRole('button').length - 1]).not.toBeDisabled()
         expect(screen.getAllByRole('button')[screen.getAllByRole('button').length - 2]).toHaveClass('Mui-disabled')
         expect(screen.getAllByRole('button')[screen.getAllByRole('button').length - 3]).toHaveClass('Mui-disabled')
         expect(screen.getAllByRole('button')[screen.getAllByRole('button').length - 4]).toHaveClass('Mui-disabled')
         expect( () => {screen.getByText("Time is up!")}).not.toThrow()
-      })
+    })
   });
 
 
