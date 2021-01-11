@@ -277,7 +277,7 @@ const questions = [
     },
 ]
 
-const shuffle = (array) => {
+export const shuffle = (array) => {
     const b = array.slice()
     const newArr = [];
     

@@ -1,9 +1,7 @@
 import React from 'react';
 import {Grid, Typography, Button, Paper, Card, CardMedia} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { useTheme } from "@material-ui/styles";
 import Box from '@material-ui/core/Box';
-import { FullscreenExit } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -45,7 +43,6 @@ const useStyles = makeStyles(theme => ({
 
 function Start({onQuizStart}) {
     const classes = useStyles()
-    const theme = useTheme();
     return (
     <Paper className={classes.paper}>
         <Grid container direction='row' alignItems='flex-start' justify='center' spacing={4}>

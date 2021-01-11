@@ -1,6 +1,7 @@
 import React from 'react';
 import {Paper, Typography, Button, Box} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { shuffledQuestions } from '../utilities/questions';
 
 const useStyles = makeStyles({
     root: {
@@ -16,7 +17,7 @@ function Result ({finalResult, onTryAgain, onHomeClick}) {
     const classes = useStyles()
     return (
         <Paper className={classes.root}>
-            <Typography variant='h5' color='textSecondary'>Your final result is {finalResult}/120</Typography>
+            <Typography variant='h5' color='textSecondary'>Your final result is {finalResult}/{shuffledQuestions.length * 10}</Typography>
             <Box m={3}>
                 <Button variant="contained" color="secondary" onClick={onTryAgain}>Try again</Button>
             </Box>
