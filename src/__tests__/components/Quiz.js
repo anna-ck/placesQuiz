@@ -1,32 +1,12 @@
 import React from 'react';
-import { render, screen, cleanup, fireEvent} from '@testing-library/react';
+import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import App from '../../components/App'
 import {shuffledQuestions} from '../../utilities/questions'
 import { act } from "react-dom/test-utils";
 
-describe('App', () => {
+describe('Quiz', () => {
     afterEach(cleanup)
     jest.useFakeTimers();
-    test('should have start quiz button', () => {
-        render(<App />);
-        expect( () => {screen.getByText(/Start quiz/)}).not.toThrow()
-      })
-      test('should start a quiz when clicking on the start button', () => {
-        render(<App />);
-        fireEvent.click(screen.getByText(/Start quiz/))
-        expect( () => {screen.getByText('1/12')}).not.toThrow()
-      })
-      test('should return to home page when clicking on the logo', () => {
-        render(<App />);
-        fireEvent.click(screen.getByText(/Quiz Heroes/))
-        expect( () => {screen.getByText(/Start quiz/)}).not.toThrow()
-      })
-      test('should return to home page when clicking on the logo when the quiz is running', () => {
-        render(<App />);
-        fireEvent.click(screen.getByText(/Start quiz/))
-        fireEvent.click(screen.getByText(/Quiz Heroes/))
-        expect( () => {screen.getByText(/Start quiz/)}).not.toThrow()
-      })
     test('should render result page when there are no questions left', () => {
         shuffledQuestions.length = 2
         render(<App />);
@@ -87,7 +67,3 @@ describe('App', () => {
         expect( () => {screen.getByText("Time is up!")}).not.toThrow()
     })
   });
-
-
-
- 
